@@ -17,6 +17,7 @@
     <script src="https://unpkg.com/supersimpledev/babel.js"></script>
     <script type="text/babel">
       function ProductDetails({ name, price, Discount_Price, imageSrc }) {
+
         return (
           <>
             <div>
@@ -27,18 +28,39 @@
               {Discount_Price && <div> Discount Price: ${Discount_Price}</div>}
               
               <button>Add to Cart</button>
+            
             </div>
             <br />
           </>
         );
       }
+      function TimeCounter({time, incrementTime, resetTime}) {
+      
+        return (
+          <div>
+            <button onClick={incrementTime}> Clicked {time} times</button>
 
+            <button onClick={incrementTime}> Clicked {time} times</button>
+            <button onClick={resetTime}> Reset</button>
+          </div>
+        );
+      }
       function App() {
+        const [time, setTime] = React.useState(0);
+          function incrementTime() {
+          setTime(time + 1);
+        }
+
+        function resetTime() {
+          setTime(0);
+        }
+
         return (
           <>
             <ProductDetails name="Cotton Socks" price={10.90} Discount_Price ={5.45} imageSrc="cotton-socks.png" />
             <ProductDetails name="Tennis Ball" price={6.00} imageSrc="tennis-balls.png" />
             <ProductDetails name="Plain T-shirt" price={7.99} imageSrc="plain-t-shirt.png" />
+            <TimeCounter time={time} incrementTime={incrementTime} resetTime={resetTime} />
           </>
         );
       }
