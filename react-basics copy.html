@@ -45,6 +45,26 @@
           </div>
         );
       }
+      function Greeting() {
+        const [name, setName] = React.useState('');
+
+        function handleChange(event) {
+          setName(event.target.value);
+        }
+        return (
+          <div>
+            <input
+              placeholder="Enter your name"
+              onChange={handleChange}
+              value={name}
+            />
+            <button onClick={() => setName('')}> Reset</button>
+            <button onClick={() => setName('John Doe')}>Example</button>
+            <p>Hello, {name}!</p>
+
+          </div>
+        );
+      }
       function App() {
         const [time, setTime] = React.useState(0);
           function incrementTime() {
@@ -54,9 +74,9 @@
         function resetTime() {
           setTime(0);
         }
-
         return (
           <>
+            <Greeting />
             <ProductDetails name="Cotton Socks" price={10.90} Discount_Price ={5.45} imageSrc="cotton-socks.png" />
             <ProductDetails name="Tennis Ball" price={6.00} imageSrc="tennis-balls.png" />
             <ProductDetails name="Plain T-shirt" price={7.99} imageSrc="plain-t-shirt.png" />
