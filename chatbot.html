@@ -2,6 +2,79 @@
 <html>
   <head>
     <title>ChatBot</title>
+    <style>
+      html, body {
+        height: 100%;
+        margin: 0;
+      }
+      body {
+        margin-top: 0;
+        margin-bottom: 0;
+      }
+      .send-button {
+        background-color: rgb(25, 135, 84);
+        color: white;
+        border: none;
+        padding: 8px 15px;
+        border-radius: 10px;
+        cursor: pointer;
+        margin-left: 10px;
+        font-size: 15px;
+      }
+      .chat-input {
+        padding: 8px;
+        font-size: 15px;
+        border-radius: 10px;
+        border: 1px solid gray;
+        flex-grow: 1;
+        margin-bottom: 60px;
+      }
+      .chat-input-container {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+      }
+      .chatbot-app {
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+        font-family: Arial, sans-serif;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+      .chat-message-user {
+        padding: 10px;
+        border-radius: 10px;
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: end;
+      }
+      .chat-message-bot {
+        padding: 10px;
+        border-radius: 10px;
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+       
+      }
+      .chat-message-text {    
+        background-color: #e1f5fe;
+        padding: 10px 15px;
+        border-radius: 10px;
+        margin-left: 10px;
+        margin-right: 10px;
+        max-width: 300px;
+      }
+      .chat-icon {
+        width: 40px;
+      }
+      .chat-messages-container {
+        flex-grow: 1;
+        margin-top: 60px;
+      }
+    </style>
   </head>
   <body>
     <div class="js-container"></div>
@@ -46,17 +119,19 @@
                    setInputText ("");
                   }
               return (
-                <>
+                <div className="chat-input-container">
                   <input 
                     placeholder="Type your message....." 
                     size="50" 
                     onChange={handleChange }
                     value={inputText}
+                    className="chat-input"
                     /> 
                   <button
                   onClick= {SendMessage}
+                  className="send-button"
                   >Send</button>  
-                </>
+                </div>
               );
             }
           
@@ -77,10 +152,12 @@
                   )
                 }*/
               return (
-                <div>
-                  {sender === "bot" && <img src="robot.png" width="30px" />}
+                <div className={sender === 'bot' ? "chat-message-bot" : "chat-message-user"}>
+                  {sender === "bot" && <img src="robot.png" className="chat-icon" />}
+                 <div className="chat-message-text">
                   {message}
-                  {sender === "user" && <img src="user.png" width="30px" />}
+                </div>
+                  {sender === "user" && <img src="user.png" className="chat-icon" />}
                 </div>
                 
               )
@@ -92,7 +169,7 @@
               
                 
                 return (
-                  <>
+                  <div className="chat-messages-container">
 
                     {chatMessages.map((item) => {
                       return (
@@ -103,7 +180,7 @@
                         />
                       );
                     })}
-                  </>
+                  </div>
                 );
             }
             function App () {
@@ -134,15 +211,15 @@
                 
 
               return (
-                <>
-                  <ChatInput 
-                    chatMessages={chatMessages}
-                    setChatMessages={setChatMessages}
-                  />
+                <div className="chatbot-app">
                   <ChatMessages
                     chatMessages={chatMessages}
                   />
-                </>
+                   <ChatInput 
+                    chatMessages={chatMessages}
+                    setChatMessages={setChatMessages}
+                  />
+                </div>
               );
             }
 
