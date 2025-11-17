@@ -2,6 +2,39 @@
 <html>
   <head>
     <title>React Basics</title>
+    <style>
+      .button-on {
+        background-color: rgb(25, 135, 84);
+        color: white;
+        border: none;
+        padding: 8px 15px;
+        border-radius: 10px;
+        cursor: pointer;
+        margin-left: 10px;
+        font-size: 15px;
+        margin-bottom: 10px;
+      }
+    
+      .button-off {
+        background-color: rgb(220, 53, 69);
+        color: white;
+        border: none;
+        padding: 8px 15px;
+        border-radius: 10px;
+        cursor: pointer;
+        margin-left: 10px;
+        font-size: 15px;
+      }
+      input {
+        padding: 8px;
+        font-size: 15px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        margin-right: 10px;
+        margin-top: 10px;
+      }
+
+    </style>
   </head>
   <body>
     <div class="js-container"></div>
@@ -65,7 +98,37 @@
           </div>
         );
       }
-      function App() {
+      function SwitchBtn() {
+        const [isOn, setIsOn] = React.useState (true);
+        function toggleSwitch() {
+          setIsOn (!isOn);
+        }
+       return <button className={isOn ? "button-on" : "button-off"}
+          onClick={toggleSwitch}
+          >{isOn ? 'On' : 'Off'}</button>;
+      }
+       function Login (){
+        const [show, setShow] = React.useState (false);
+        function toggleShow() {
+          setShow (!show);
+        }
+        return (
+          <div>
+            <h2>Hello, Welcome to my website</h2>
+            
+            <input type="text" placeholder="Username" style={{display: 'block', margin: '10px 0'}} />
+
+            <input type={show ? "text" : "password"} placeholder="Password"  />
+            <button onClick={toggleShow}>{show ? 'Hide' : 'Show'}</button>
+            <br />
+            <button className='Login'>Login</button>
+            <button className='SignUp'>Sign Up</button>
+          </div>
+        )
+       }
+
+
+      function App() { 
         const [time, setTime] = React.useState(0);
           function incrementTime() {
           setTime(time + 1);
@@ -76,11 +139,13 @@
         }
         return (
           <>
+            <SwitchBtn />
             <Greeting />
             <ProductDetails name="Cotton Socks" price={10.90} Discount_Price ={5.45} imageSrc="cotton-socks.png" />
             <ProductDetails name="Tennis Ball" price={6.00} imageSrc="tennis-balls.png" />
             <ProductDetails name="Plain T-shirt" price={7.99} imageSrc="plain-t-shirt.png" />
             <TimeCounter time={time} incrementTime={incrementTime} resetTime={resetTime} />
+            <Login />
           </>
         );
       }

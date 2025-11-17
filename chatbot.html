@@ -3,10 +3,6 @@
   <head>
     <title>ChatBot</title>
     <style>
-      html, body {
-        height: 100%;
-        margin: 0;
-      }
       body {
         margin-top: 0;
         margin-bottom: 0;
@@ -30,14 +26,14 @@
       }
       .chat-input-container {
         display: flex;
-        margin-bottom: 60px;
+        margin-bottom: 20px;
       }
       .chatbot-app {
         max-width: 600px;
         margin-left: auto;
         margin-right: auto;
         font-family: Arial, sans-serif;
-        height: 100vh;
+        max-height: 100vh;
         display: flex;
         flex-direction: column;
       }
@@ -70,9 +66,7 @@
       }
       .chat-messages-container {
         flex-grow: 1;
-        margin-top: 60px;
-        overflow: scroll;
-        scrollbar-width: none;
+        
       }
     </style>
   </head>
@@ -164,19 +158,12 @@
             }
 
             function ChatMessages({ chatMessages }) {
-              const chatContainerRef = React.useRef(null);
-              React.useEffect(() => {
-                if (chatContainerRef.current) {
-                  chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
-                }
-              }, [chatMessages]);
                   // useState returns an array with two items
               // const [chatMessages, setChatMessages]
               
                 
                 return (
-                  <div className="chat-messages-container"
-                  ref= {chatContainerRef}>
+                  <div className="chat-messages-container">
 
                     {chatMessages.map((item) => {
                       return (
